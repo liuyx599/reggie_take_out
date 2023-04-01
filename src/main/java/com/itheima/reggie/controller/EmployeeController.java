@@ -41,13 +41,14 @@ public class EmployeeController {
         Employee emp = employeeService.getOne(queryWrapper);
 
         //3、如果没有查询到则返回登录失败结果
+        // SpringMVC会将R对象转为Json形式返回，可在response中查看该json
         if(emp == null){
-            return R.error("登录失败");
+            return R.error("该用户名不存在！");
         }
 
         //4、密码比对，如果不一致则返回登录失败结果
         if(!emp.getPassword().equals(password)){
-            return R.error("登录失败");
+            return R.error("密码错误，登录失败！");
         }
 
         // 到这一步的时候 密码已经比对成功了

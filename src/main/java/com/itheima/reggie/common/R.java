@@ -10,16 +10,21 @@ import java.util.Map;
  * R是类的名称，T代表泛型
  */
 @Data
-public class R<T> {
+public class R<T> {  // R<T> 表示这是一个泛型类，把R<T>当作一个整体
 
     private Integer code; //编码：1成功，0和其它数字为失败
 
     private String msg; //错误信息
 
-    private T data; //数据  比如 employee对象 或者 orders对象等等
+    private T data; // 如果T=String , 那么R对象就是R<String>，那么data成员变量的类型是 String
 
     private Map map = new HashMap(); //动态数据
 
+
+    // 第一个<T>是泛型参数，替代参数中的T，  第二个R<T>当作一个整体，即R对象，作为该方法的返回值
+
+    // 成功success与失败error哦都会返回一个新的R对象
+    // SpringMVC会将其转为json对象放于response中
     public static <T> R<T> success(T object) {
         R<T> r = new R<T>();
         r.data = object;
