@@ -58,6 +58,7 @@ public class EmployeeController {
         }
 
         //6、登录成功，将员工id存入Session并返回登录成功结果
+        // request页面中的请求，登录一般是post
         request.getSession().setAttribute("employee",emp.getId());
         return R.success(emp);
     }

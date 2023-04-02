@@ -44,10 +44,11 @@
 
   // 响应拦截器
   service.interceptors.response.use(res => {
+    // 前端相应拦截器并且做重定向
       if (res.data.code === 0 && res.data.msg === 'NOTLOGIN') {// 返回登录页面
-        console.log('---/backend/page/login/login.html---')
+        console.log('---/backend/page/login/login.html---')   // 这个输出在浏览器的console可以查到
         localStorage.removeItem('userInfo')
-        window.top.location.href = '/backend/page/login/login.html'
+        window.top.location.href = '/backend/page/login/login.html'   // 重定向到登录界面
       } else {
         return res.data
       }
