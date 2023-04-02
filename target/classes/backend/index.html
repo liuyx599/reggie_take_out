@@ -125,7 +125,7 @@
                   {
                     id: '2',
                     name: '员工管理',
-                    url: 'page/member/list.html',
+                    url: 'page/member/list.html',   //不同菜单有不同页面url，鼠标点击之后就展现不同的页面效果
                     icon: 'icon-member'
                   },
                   {
@@ -155,6 +155,8 @@
               //   ],
               // },
             ],
+            // iframeUrl相当于页面中挖了一个坑
+            // 点击左侧的菜单栏不同选项卡 本质就是通过改变iframeUrl来展现不同的页面
             iframeUrl: 'page/member/list.html',
             headTitle: '员工管理',
             goBackFlag: false,

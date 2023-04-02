@@ -16,7 +16,6 @@ import java.io.IOException;
  */
 @WebFilter(filterName = "loginCheckFilter",urlPatterns = "/*")
 @Slf4j   // 日志库
-
 public class LoginCheckFilter implements Filter{
     //路径匹配器，支持通配符
     public static final AntPathMatcher PATH_MATCHER = new AntPathMatcher();
