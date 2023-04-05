@@ -60,7 +60,7 @@
         ></el-table-column>
         <el-table-column label="账号状态">
           <template slot-scope="scope">
-            {{ String(scope.row.status) === '0' ? '已禁用' : '正常' }}
+            {{ String(scope.row.status) === '0' ? '已禁用' : '正常' }}   <!--将status中的0,1展示为已禁用  or 正常-->
           </template>
         </el-table-column>
         <el-table-column
@@ -84,7 +84,7 @@
               class="delBut non"
               @click="statusHandle(scope.row)"
               v-if="user === 'admin'"
-            >
+            >     <!--只有管理员 即admin用户才能激活el-button按钮 此时才能看到员工禁用或者启用状态-->
               {{ scope.row.status == '1' ? '禁用' : '启用' }}
             </el-button>
           </template>
@@ -117,8 +117,9 @@
           return {
              input: '',
              counts: 0,
-             page: 1,
-             pageSize: 10,
+            // page pageSize两个参数传递给后端 sevice中的page方法，service再调用底层mapper实现分页查询功能
+             page: 1,         // 分页查询 默认page为1
+             pageSize: 10,    // 分页查询 默认每页显示为10，
              tableData : [],
              id : '',
              status : '',
@@ -127,6 +128,7 @@
         computed: {},
         created() {
           this.init()
+          // 获取当前登录员工的账号，并赋值给模型数据user
           this.user = JSON.parse(localStorage.getItem('userInfo')).username
         },
         mounted() {
