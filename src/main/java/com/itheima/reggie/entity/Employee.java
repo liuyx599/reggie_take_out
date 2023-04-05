@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
  * 员工实体
  */
 @Data
+// mybatis plus实体直接与数据库中的表完成映射 驼峰映射 Employee->employee   dishFlavor->dish_fLavor
 public class Employee implements Serializable {
 
     private static final long serialVersionUID = 1L;
