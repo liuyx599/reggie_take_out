@@ -11,6 +11,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * 分类管理
  */
@@ -76,5 +78,34 @@ public class CategoryController {
 
         categoryService.updateById(category);
         return R.success("修改分类信息成功");
+    }
+
+
+    /**
+     * 根据条件查询分类数据
+     * 这里之所以返回list集合，是因为这个要展示的数据是引用类型的数据集，集合可以存放任意类型的数据；
+     * 对应前端代码。即添加菜品中的下拉菜单，返回一个列表
+     // 获取菜品分类列表
+     const getCategoryList = (params) => {
+     return $axios({
+     url: '/category/list',
+     method: 'get',
+     params
+     })
+     }
+     * @param category
+     * @return
+     */
+    @GetMapping("/list")
+    public R<List<Category>> list(Category category){
+        //条件构造器
+        LambdaQueryWrapper<Category> queryWrapper = new LambdaQueryWrapper<>();
+        //添加条件
+        queryWrapper.eq(category.getType() != null,Category::getType,category.getType());
+        //添加排序条件
+        queryWrapper.orderByAsc(Category::getSort).orderByDesc(Category::getUpdateTime);
+
+        List<Category> list = categoryService.list(queryWrapper);
+        return R.success(list);
     }
 }
