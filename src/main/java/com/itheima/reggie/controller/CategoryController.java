@@ -53,19 +53,16 @@ public class CategoryController {
     }
 
     /**
-     * 根据id删除分类
+     * 根据id来删除分类的数据
      * @param id
      * @return
      */
     @DeleteMapping
-    public R<String> delete(Long id){
-        log.info("删除分类，id为：{}",id);
-
-        //categoryService.removeById(id);
-        categoryService.remove(id);
-
+    public R<String> delete(@RequestParam("ids") Long id){ //注意这里前端传过来的数据是ids
+        categoryService.remove(id);  // 这个remove是我们自定义的，在CategoryServiceImpl中进行了实现
         return R.success("分类信息删除成功");
     }
+
 
     /**
      * 根据id修改分类信息
@@ -77,7 +74,6 @@ public class CategoryController {
         log.info("修改分类信息：{}",category);
 
         categoryService.updateById(category);
-
         return R.success("修改分类信息成功");
     }
 }
