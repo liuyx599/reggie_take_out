@@ -1,3 +1,9 @@
+# CommonController中的上传和下载的路径
+# @Value("${reggie.path}")
+reggie:
+  path: D:\reggie\
+
+
 server:
   port: 8080
 spring:
