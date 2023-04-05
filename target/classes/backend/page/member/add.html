@@ -132,7 +132,7 @@
         },
         created() {
           this.id = requestUrlParam('id')
-          this.actionType = this.id ? 'edit' : 'add'
+          this.actionType = this.id ? 'edit' : 'add'   // 既可以当新增页面 又可以当修改页面
           if (this.id) {
             this.init()
           }

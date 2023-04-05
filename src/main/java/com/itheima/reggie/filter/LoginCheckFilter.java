@@ -1,6 +1,7 @@
 package com.itheima.reggie.filter;
 
 import com.alibaba.fastjson.JSON;
+import com.itheima.reggie.common.BaseContext;
 import com.itheima.reggie.common.R;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.AntPathMatcher;
@@ -15,7 +16,7 @@ import java.io.IOException;
  * 检查用户是否已经完成登录
  */
 @WebFilter(filterName = "loginCheckFilter",urlPatterns = "/*")
-@Slf4j   // 日志库
+@Slf4j
 public class LoginCheckFilter implements Filter{
     //路径匹配器，支持通配符
     public static final AntPathMatcher PATH_MATCHER = new AntPathMatcher();
@@ -28,14 +29,12 @@ public class LoginCheckFilter implements Filter{
         //1、获取本次请求的URI
         String requestURI = request.getRequestURI();// /backend/index.html
 
-        log.info("拦截到请求：{}",requestURI); // 使用log.info可以像python一样输出，而不需要像println一样 用 + 号连接字符串
+        log.info("拦截到请求：{}",requestURI);
 
-        //定义不需要处理的请求路径，相当于白名单
+        //定义不需要处理的请求路径
         String[] urls = new String[]{
                 "/employee/login",
                 "/employee/logout",
-
-                //静态页面随他看
                 "/backend/**",
                 "/front/**"
         };
@@ -54,6 +53,10 @@ public class LoginCheckFilter implements Filter{
         //4、判断登录状态，如果已登录，则直接放行
         if(request.getSession().getAttribute("employee") != null){
             log.info("用户已登录，用户id为：{}",request.getSession().getAttribute("employee"));
+
+            Long empId = (Long) request.getSession().getAttribute("employee");
+            BaseContext.setCurrentId(empId);   // 记录当前登录用户ID
+
             filterChain.doFilter(request,response);
             return;
         }
