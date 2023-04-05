@@ -72,7 +72,7 @@ public class DishServiceImpl extends ServiceImpl<DishMapper,Dish> implements Dis
     @Override
     @Transactional
     public void updateWithFlavor(DishDto dishDto) {
-        //更新dish表基本信息
+        //更新dish表基本信息  因为这里的dishDto是dish的子类
         this.updateById(dishDto);
 
         //清理当前菜品对应口味数据---dish_flavor表的delete操作
