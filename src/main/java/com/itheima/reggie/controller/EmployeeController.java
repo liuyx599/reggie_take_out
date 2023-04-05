@@ -134,5 +134,23 @@ public class EmployeeController {
     }
 
 
+    /**
+     * 根据id修改员工信息
+     * @param employee
+     * @return
+     */
+    @PutMapping
+    public R<String> update(HttpServletRequest request,@RequestBody Employee employee){
+        // 将前端传过来的employee信息mapping到数据库中
+        log.info(employee.toString());
+
+        Long empId = (Long)request.getSession().getAttribute("employee");
+        employee.setUpdateTime(LocalDateTime.now());   // 时间也要更新
+        employee.setUpdateUser(empId);                 // 记录更改信息的用户ID
+        employeeService.updateById(employee);
+
+        return R.success("员工信息修改成功");
+    }
+
 
 }
