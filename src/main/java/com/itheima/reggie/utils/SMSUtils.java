@@ -21,9 +21,9 @@ public class SMSUtils {
 	 */
 	public static void sendMessage(String signName, String templateCode,String phoneNumbers,String param){
 
-		// AccessKey
-		String accessKeyId = "LTAI5t7RnEtYvVFYLL2PESij";
-		String secret = "PtwnTMi5QOV9Es5e1LYXsju7GMY5Hq";
+		// AccessKey  保密key和secret
+		String accessKeyId = "#";
+		String secret = "#";
 		DefaultProfile profile = DefaultProfile.getProfile("cn-hangzhou",accessKeyId, secret);
 
 		IAcsClient client = new DefaultAcsClient(profile);
