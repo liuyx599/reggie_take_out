@@ -129,6 +129,7 @@ public class DishController {
     @GetMapping("/list")
     /*
     * 对应前端list请求  /dish/list
+    * 这样子写其实不太好，应该control与service分离，这里相当于直接把service该做的写在了control里面
     * */
     public R<List<DishDto>> list(Dish dish) {
         log.info("dish:{}", dish);
@@ -157,5 +158,28 @@ public class DishController {
         }).collect(Collectors.toList());
 
         return R.success(dishDtos);
+    }
+
+    /**
+     * 对菜品批量或者是单个 进行停售或者是起售
+     * 参考套餐的更改逻辑
+     * @return
+     */
+    @PostMapping("/status/{status}")
+    public R<String> status(@PathVariable("status") Integer status,@RequestParam List<Long> ids){
+        // debug使用
+//        log.info("status:{}",status);
+//        log.info("ids:{}",ids);
+//
+//        List<Dish> list = dishService.listByIds(ids);
+//        for (Dish dish : list) {
+//            if (dish != null){
+//                String dishName = dish.getName();
+//                log.info("请求修改菜品 {} 的起售/停售状态 ", dishName);
+//            }
+//        }
+
+        dishService.updateSetmealStatusById(status,ids);   // 具体的逻辑实现放service中，control直接调用
+        return R.success("售卖状态修改成功");
     }
 }

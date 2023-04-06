@@ -91,4 +91,20 @@ public class DishServiceImpl extends ServiceImpl<DishMapper,Dish> implements Dis
 
         dishFlavorService.saveBatch(flavors);
     }
+
+    @Override
+    public void updateSetmealStatusById(Integer status, List<Long> ids) {
+
+        LambdaQueryWrapper<Dish> queryWrapper = new LambdaQueryWrapper();
+        queryWrapper.in(ids !=null,Dish::getId,ids);
+        //根据数据进行批量查询
+        List<Dish> list = this.list(queryWrapper);   // this表示当前  DishService 服务，list是底层sql查询方法
+
+        for (Dish dish : list) {
+            if (dish != null){
+                dish.setStatus(status);
+                this.updateById(dish);
+            }
+        }
+    }
 }
