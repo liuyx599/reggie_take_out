@@ -293,7 +293,8 @@
             this.initData()
           },
           methods:{
-            //初始化数据
+            //初始化数据,同时发送两个list请求，都请求横杠才会把接受到的数据显示
+            // 只要有一个不成功就不会把数据显示在页面中
             initData(){
               Promise.all([categoryListApi(),cartListApi({})]).then(res=>{
                 //获取分类数据

@@ -42,7 +42,7 @@ public class SetmealController {
      * @return
      */
     @PostMapping
-    public R<String> save(@RequestBody SetmealDto setmealDto){
+    public R<String> save(@RequestBody SetmealDto setmealDto){   // 请求是以json数据传递 所以用@RequestBody注解，并用setmealDto接收
         log.info("套餐信息：{}",setmealDto);
 
         setmealService.saveWithDish(setmealDto);
@@ -110,7 +110,7 @@ public class SetmealController {
     }
 
     @GetMapping("/list")
-    public R<List<Setmeal>> list(Setmeal setmeal) {
+    public R<List<Setmeal>> list(Setmeal setmeal) {   //传过来的参数不是Json，而是在url中以键值对的形式。?a=1&b=2 所以不用@Requestbody接收
         log.info("setmeal:{}", setmeal);
         //条件构造器
         LambdaQueryWrapper<Setmeal> queryWrapper = new LambdaQueryWrapper<>();

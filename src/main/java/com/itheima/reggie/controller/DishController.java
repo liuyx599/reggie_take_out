@@ -157,7 +157,7 @@ public class DishController {
             return dishDto;
         }).collect(Collectors.toList());
 
-        return R.success(dishDtos);
+        return R.success(dishDtos);   //  返回dishDto（包含口味的Dish信息）给前端展示
     }
 
     /**
