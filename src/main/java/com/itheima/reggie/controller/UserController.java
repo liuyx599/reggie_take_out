@@ -27,7 +27,7 @@ public class UserController {
 
     /**
      * 发送手机短信验证码   对应前端front的login.js中的url请求  /url/sendMsg  post请求
-     * @param user
+     * @param user  用user形式接收request中的json，可以debug看看
      * @return
      */
     @PostMapping("/sendMsg")
@@ -44,7 +44,7 @@ public class UserController {
             // TODO
             // 下面的注释取消，换成阿里云中的签名，模板
             //调用阿里云提供的短信服务API完成发送短信，前面两个参数是阿里云服务中的签名+模板
-            //SMSUtils.sendMessage("瑞吉外卖","",phone,code);
+//            SMSUtils.sendMessage("小当家外卖","SMS_275320814", phone, code);
 
             //需要将生成的验证码保存到Session
             session.setAttribute(phone,code);
@@ -61,6 +61,8 @@ public class UserController {
      * @return
      */
     @PostMapping("/login")
+    // @Requestbody主要用来接收前端传递给后端的json字符串中的数据的
+    // 用map接收
     public R<User> login(@RequestBody Map map, HttpSession session){
         log.info(map.toString());
 

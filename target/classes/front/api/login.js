@@ -13,4 +13,14 @@ function loginoutApi() {
   })
 }
 
+
+// 发送短信
+function sendMsgApi(data){
+    return $axios({
+        'url':'/user/sendMsg',
+        'method':'post',
+        data
+    })
+}
+
   

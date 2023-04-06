@@ -20,7 +20,12 @@ public class SMSUtils {
 	 * @param param 参数
 	 */
 	public static void sendMessage(String signName, String templateCode,String phoneNumbers,String param){
-		DefaultProfile profile = DefaultProfile.getProfile("cn-hangzhou", "", "");
+
+		// AccessKey
+		String accessKeyId = "LTAI5t7RnEtYvVFYLL2PESij";
+		String secret = "PtwnTMi5QOV9Es5e1LYXsju7GMY5Hq";
+		DefaultProfile profile = DefaultProfile.getProfile("cn-hangzhou",accessKeyId, secret);
+
 		IAcsClient client = new DefaultAcsClient(profile);
 
 		SendSmsRequest request = new SendSmsRequest();
@@ -31,7 +36,8 @@ public class SMSUtils {
 		request.setTemplateParam("{\"code\":\""+param+"\"}");
 		try {
 			SendSmsResponse response = client.getAcsResponse(request);
-			System.out.println("短信发送成功");
+			// response.message 测试专用签名和模板必须结合使用
+			System.out.println("阿里云 - 短信发送成功");
 		}catch (ClientException e) {
 			e.printStackTrace();
 		}
