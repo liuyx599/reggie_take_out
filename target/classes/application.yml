@@ -3,6 +3,11 @@
 reggie:
   path: D:\reggie\
 
+# 用户登录名称 ruiji@1359980749621981.onaliyun.com
+#AccessKey ID LTAI5tRutQ6gh7UyuHJqKvh8
+#AccessKey Secret ghHFjkhAIrqJ6P9UV3UsY6yCmgJpII
+
+
 
 server:
   port: 8080
