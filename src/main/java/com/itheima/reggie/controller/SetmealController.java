@@ -121,4 +121,21 @@ public class SetmealController {
 
         return R.success(setmealService.list(queryWrapper));
     }
+
+    /**
+     * 前端的请求  /setmeal/status/0?id=xxxxx
+     * 对菜品批量或者是单个 进行停售或者是起售
+     * @return
+     */
+    @PostMapping("/status/{status}")
+//这个参数这里一定记得加注解才能获取到参数，否则这里非常容易出问题
+    // @PathVariable 表示url中的占位符{status}
+    // 因为停售的请求是/status/0?id=xx
+    //     启售的请求是/status/1?id=xx
+    public R<String> status(@PathVariable("status") Integer status,@RequestParam List<Long> ids){
+        setmealService.updateSetmealStatusById(status,ids);
+        return R.success("售卖状态修改成功");
+    }
+
+
 }
