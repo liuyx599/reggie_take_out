@@ -6,16 +6,6 @@ function categoryListApi() {
     })
   }
 
-
-//获取购物车内商品的集合
-function cartListApi(data) {
-    return $axios({
-        'url': '/shoppingCart/list',
-        'method': 'get',
-        params:{...data}
-    })
-}
-
 //获取菜品分类对应的菜品
 function dishListApi(data) {
     return $axios({
@@ -34,6 +24,14 @@ function setmealListApi(data) {
     })
 }
 
+//获取购物车内商品的集合
+function cartListApi(data) {
+    return $axios({
+        'url': '/shoppingCart/list',
+        'method': 'get',
+        params:{...data}
+    })
+}
 
 //购物车中添加商品
 function  addCartApi(data){
